@@ -1,1 +1,0 @@
-// this is the app.js file for the frontend
