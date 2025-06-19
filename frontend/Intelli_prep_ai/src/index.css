@@ -1,68 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+/* Theme variables */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-display: "Urbanist", sans-serif;
+  --breakpoint-3xl: 1920px;
+  --color-primary: #FF9324;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+/* Custom scrollbar track */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
-a:hover {
-  color: #535bf2;
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
 }
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.4);
+  border-radius: 10px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Keyframes for text shine */
+@keyframes text-shine {
+  0% {
+    background-position: 0% 50%;
   }
-  a:hover {
-    color: #747bff;
+  100% {
+    background-position: 100% 50%;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+/* Keyframes for blob animations */
+@keyframes blob1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -60px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+@keyframes blob2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(-40px, 60px) scale(1.05);
+  }
+  66% {
+    transform: translate(20px, -40px) scale(0.95);
+  }
+}
+@keyframes blob3 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(20px, 140px) scale(1.15);
+  }
+  66% {
+    transform: translate(-30px, -30px) scale(0.85);
+  }
+}
+
+@layer base {
+  html {
+    font-family: var(--font-display);
+  }
+  body {
+    background-color: #fcfbfc;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  /* Text shine utility */
+  .text-shine {
+    background: linear-gradient(90deg, #fff, #FF9324, #fff);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: text-shine 2s linear infinite;
+  }
+  .animate-text-shine {
+    animation: text-shine 3s ease-in-out infinite alternate;
+  }
+  .animate-blob1 {
+    animation: blob1 8s ease-in-out infinite;
+  }
+  .animate-blob2 {
+    animation: blob2 10s ease-in-out infinite;
+  }
+  .animate-blob3 {
+    animation: blob3 12s ease-in-out infinite;
+  }
+
+  /* Custom utility classes */
+  .input-box {
+    @apply w-full flex justify-between gap-3 text-sm text-black bg-gray-50/50 rounded px-4 py-3 mb-4 mt-3 border;
+  }
+  .btn-primary {
+    @apply w-full flex items-center justify-center gap-3 text-sm font-medium text-white bg-black shadow-lg shadow-black/10 rounded;
+  }
+  .btn-small {
+    @apply flex items-center justify-center gap-3 bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-4 py-2 rounded;
   }
 }
